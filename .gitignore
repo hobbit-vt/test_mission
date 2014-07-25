@@ -26,3 +26,4 @@
 /node_modules/*
 
 file_storage_db.json
+file_storage_db_test.json
