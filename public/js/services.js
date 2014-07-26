@@ -65,15 +65,11 @@
          */
         this.remove = function(address){
 
-            for(var i = 0; i < this._addresses.length; i++) {
+            var index = this._addresses.indexOf(address);
+            if(index !== -1) {
 
-                if(this._addresses[i].id === address.id) {
-
-                    this._addresses.splice(i, 1);
-                    $http.post(REQUEST_PATHS.remove, address);
-
-                    break;
-                }
+                this._addresses.splice(index, 1);
+                $http.post(REQUEST_PATHS.remove, address);
             }
         };
         /**
