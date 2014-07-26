@@ -10,7 +10,10 @@ module.exports = {
 
         if(address && typeof(address.id) === 'string' && typeof(address.name) === 'string') {
 
-            result = true;
+            if(address.id.trim().length > 0 && address.name.trim().length > 0){
+
+                result = true;
+            }
         }
         return result;
     }
