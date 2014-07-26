@@ -20,6 +20,17 @@
         $scope.remove = function(idx) {
 
             addressService.remove($scope.addresses[idx]);
+        };
+
+        $scope.showUpdateForm = function(idx){
+
+            $scope.addresses[idx].formShowed = true;
+        };
+
+        $scope.update = function(idx) {
+
+            delete $scope.addresses[idx].formShowed;
+            addressService.update($scope.addresses[idx]);
         }
     }]);
 

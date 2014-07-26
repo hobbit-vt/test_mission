@@ -4,7 +4,8 @@
     var REQUEST_PATHS = {
         list: '/list',
         add: '/add',
-        remove: '/remove'
+        remove: '/remove',
+        update: '/update'
     };
 
     addressBook.service('addressService', ['$q', '$http', function($q, $http) {
@@ -74,7 +75,15 @@
                     break;
                 }
             }
-        }
+        };
+        /**
+         * Updates address at server
+         * @param address
+         */
+        this.update = function(address){
+
+            $http.post(REQUEST_PATHS.update, address);
+        };
     }]);
 
     /**
