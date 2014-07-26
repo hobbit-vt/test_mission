@@ -9,6 +9,7 @@ app.set('views', __dirname + '/views');
 app.engine('html', ejs.renderFile);
 
 app.use(express.static(__dirname + '/public'));
+app.use(express.json());
 
 app.get('/', function(req, res){
 	res.render('index.html');

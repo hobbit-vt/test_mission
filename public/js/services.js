@@ -27,19 +27,19 @@
 
                 $http.get(REQUEST_PATHS.list)
                     .then(
-                        function(result) {
+                    function(result) {
 
-                            _processInitializedGet(defer, result.data, id);
+                        _processInitializedGet(defer, result.data, id);
 
-                            this._addresses = result.data;
-                            initialized = true;
+                        this._addresses = result.data;
+                        initialized = true;
 
-                        }.bind(this),
-                        function() {
+                    }.bind(this),
+                    function() {
 
-                            defer.reject('service unavailable');
-                        }
-                    );
+                        defer.reject('service unavailable');
+                    }
+                );
             } else {
 
                 _processInitializedGet(defer, this._addresses, id);
@@ -47,6 +47,14 @@
 
             return defer.promise;
         };
+
+        this.add = function(address){
+
+            address.id = _generateId();
+            this._addresses.push(address);
+
+            $http.post(REQUEST_PATHS.add, address);
+        }
     }]);
 
     /**
@@ -79,5 +87,14 @@
                 defer.reject('id does not exist');
             }
         }
+    }
+
+    /**
+     * Generates unique identifier
+     * @private
+     */
+    function _generateId(){
+
+        return Math.floor(Math.random() * Math.pow(36, 4)).toString(16);
     }
 })();

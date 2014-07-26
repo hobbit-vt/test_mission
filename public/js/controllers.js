@@ -4,10 +4,18 @@
 
     addressBook.controller('MainController', ['$scope', 'addressService', function($scope, addressService){
 
+        $scope.newAddress = {};
+
         addressService.get().then(function(result){
 
             $scope.addresses = result;
         });
+
+        $scope.add = function() {
+
+            addressService.add($scope.newAddress);
+            $scope.newAddress = {};
+        }
     }]);
 
     addressBook.controller('DetailController', ['$scope', '$routeParams', 'addressService',

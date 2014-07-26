@@ -24,7 +24,10 @@ function list(req, res){
  */
 function add(req, res){
 
-    res.json(false);
+    var result = true;
+    fileStorage.add(req.body);
+
+    res.json(result);
 }
 
 /**
