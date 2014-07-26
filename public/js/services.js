@@ -47,13 +47,33 @@
 
             return defer.promise;
         };
-
+        /**
+         * Adds address to server
+         * @param address
+         */
         this.add = function(address){
 
             address.id = _generateId();
             this._addresses.push(address);
 
             $http.post(REQUEST_PATHS.add, address);
+        };
+        /**
+         * Removes address from server
+         * @param address
+         */
+        this.remove = function(address){
+
+            for(var i = 0; i < this._addresses.length; i++) {
+
+                if(this._addresses[i].id === address.id) {
+
+                    this._addresses.splice(i, 1);
+                    $http.post(REQUEST_PATHS.remove, address);
+
+                    break;
+                }
+            }
         }
     }]);
 

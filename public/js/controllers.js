@@ -15,6 +15,11 @@
 
             addressService.add($scope.newAddress);
             $scope.newAddress = {};
+        };
+
+        $scope.remove = function(idx) {
+
+            addressService.remove($scope.addresses[idx]);
         }
     }]);
 

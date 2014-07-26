@@ -55,16 +55,14 @@ FileStorage.prototype = {
      */
     remove: function(obj){
 
-        var i;
-        for(i = 0; i < this._objects.length; i++) {
+        for(var i = 0; i < this._objects.length; i++) {
 
             if(obj === this._objects[i]) {
 
+                this._objects.splice(i, 1);
                 break;
             }
         }
-
-        this._objects.splice(i, 1);
         this._trySaveJson();
     },
 

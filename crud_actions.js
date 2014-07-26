@@ -44,5 +44,22 @@ function add(req, res){
  */
 function remove(req, res){
 
-    res.json(false);
+    var result = false;
+
+    if(addressValidator.validate(req.body)) {
+
+        var objects = fileStorage.getObjects();
+
+        for(var i = 0; i < objects.length; i++) {
+
+            if(objects[i].id === req.body.id){
+
+                fileStorage.remove(objects[i]);
+                result = true;
+
+                break;
+            }
+        }
+    }
+    res.json(result);
 }
