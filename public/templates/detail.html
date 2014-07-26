@@ -1,0 +1,13 @@
+<div ng-switch="success">
+    <div ng-switch-when="true">
+        Name: {{address.name}} <br>
+        Phone: {{address.phone}}
+    </div>
+    <div ng-switch-when="false">
+        Error because... {{reason}}
+    </div>
+</div>
+
+<div ng-hide="success">
+
+</div>
