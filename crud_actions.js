@@ -1,5 +1,8 @@
-var Storage = require('./file_storage');
+var Storage             = require('./file_storage'),
+    addressValidator    = require('./address_validator');
+
 var fileStorage = new Storage();
+
 
 module.exports = {
 	list: list,
@@ -24,9 +27,13 @@ function list(req, res){
  */
 function add(req, res){
 
-    var result = true;
-    fileStorage.add(req.body);
+    var result = false;
 
+    if(addressValidator.validate(req.body)) {
+
+        fileStorage.add(req.body);
+        result = true;
+    }
     res.json(result);
 }
 
