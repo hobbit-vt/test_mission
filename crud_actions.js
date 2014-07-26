@@ -1,6 +1,8 @@
+var Storage = require('./file_storage');
+var fileStorage = new Storage();
+
 module.exports = {
 	list: list,
-	get: get,
 	add: add,
 	remove: remove
 };
@@ -12,17 +14,7 @@ module.exports = {
  */
 function list(req, res){
 
-    res.json([]);
-}
-
-/**
- * Gets a person
- * @param req Request
- * @param res Response
- */
-function get(req, res) {
-
-    res.json({});
+    res.json(fileStorage.getObjects());
 }
 
 /**

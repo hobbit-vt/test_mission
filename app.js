@@ -15,9 +15,8 @@ app.get('/', function(req, res){
 });
 
 app.get('/list', crudActions.list);
-app.get('/get/:id', crudActions.get);
-app.get('/add/:id', crudActions.add);
-app.get('/remove/:id', crudActions.remove);
+app.post('/add', crudActions.add);
+app.post('/remove/:id', crudActions.remove);
 
 
 

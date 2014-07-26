@@ -1,15 +1,17 @@
 (function(){
 
     var addressBook = angular.module('addressBook');
+    var REQUEST_PATHS = {
+        list: '/list',
+        add: '/add',
+        remove: '/remove'
+    };
 
-    addressBook.service('addressService', ['$q', function($q) {
+    addressBook.service('addressService', ['$q', '$http', function($q, $http) {
 
-        this._addresses = [
-            {id: '0', name: 'some_name0', phone: '324 654 5'},
-            {id: '1', name: 'some_name1', phone: ''},
-            {id: '2', name: 'some_name2'},
-            {id: '3', name: 'some_name3', phone: '654 564 2'},
-        ];
+        var initialized = false;
+
+        this._addresses = [];
 
         /**
          * Gets all addresses or by id
@@ -18,30 +20,64 @@
          */
         this.get = function(id) {
 
-            var deferred = $q.defer();
+            var defer = $q.defer();
 
-            if(!id) {
 
-                deferred.resolve(this._addresses);
+            if(!initialized) {
 
+                $http.get(REQUEST_PATHS.list)
+                    .then(
+                        function(result) {
+
+                            _processInitializedGet(defer, result.data, id);
+
+                            this._addresses = result.data;
+                            initialized = true;
+
+                        }.bind(this),
+                        function() {
+
+                            defer.reject('service unavailable');
+                        }
+                    );
             } else {
 
-                var isFound = false;
+                _processInitializedGet(defer, this._addresses, id);
+            }
 
-                for(var i = 0; i < this._addresses.length; i++) {
+            return defer.promise;
+        };
+    }]);
 
-                    if(this._addresses[i].id === id) {
+    /**
+     * Processes get request
+     * @param defer Deffer for resolve
+     * @param addresses Array of known addresses
+     * @param id {undefined|Number} Id for search
+     * @private
+     */
+    function _processInitializedGet(defer, addresses, id){
 
-                        deferred.resolve(this._addresses[i]);
-                        isFound = true;
-                    }
-                }
-                if(!isFound) {
+        if(!id) {
 
-                    deferred.reject('Id does not exist');
+            defer.resolve(addresses);
+
+        } else {
+
+            var isFound = false;
+
+            for(var i = 0; i < addresses.length; i++) {
+
+                if(addresses[i].id === id) {
+
+                    defer.resolve(addresses[i]);
+                    isFound = true;
                 }
             }
-            return deferred.promise;
+            if(!isFound) {
+
+                defer.reject('id does not exist');
+            }
         }
-    }]);
+    }
 })();
