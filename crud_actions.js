@@ -7,7 +7,8 @@ var fileStorage = new Storage();
 module.exports = {
 	list: list,
 	add: add,
-	remove: remove
+	remove: remove,
+    update: update
 };
 
 /**
@@ -55,6 +56,33 @@ function remove(req, res){
             if(objects[i].id === req.body.id){
 
                 fileStorage.remove(objects[i]);
+                result = true;
+
+                break;
+            }
+        }
+    }
+    res.json(result);
+}
+
+/**
+ * Updates a person
+ * @param req Request
+ * @param res Response
+ */
+function update(req, res){
+
+    var result = false;
+
+    if(addressValidator.validate(req.body)) {
+
+        var objects = fileStorage.getObjects();
+
+        for(var i = 0; i < objects.length; i++) {
+
+            if(objects[i].id === req.body.id) {
+
+                fileStorage.update(objects[i], req.body);
                 result = true;
 
                 break;

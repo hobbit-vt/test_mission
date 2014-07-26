@@ -18,6 +18,7 @@ app.get('/', function(req, res){
 app.get('/list', crudActions.list);
 app.post('/add', crudActions.add);
 app.post('/remove', crudActions.remove);
+app.post('/update', crudActions.update);
 
 
 
