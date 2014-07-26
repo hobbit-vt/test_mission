@@ -55,17 +55,27 @@ FileStorage.prototype = {
      */
     remove: function(obj){
 
-        for(var i = 0; i < this._objects.length; i++) {
+        var index = this._objects.indexOf(obj);
+        if(index !== -1) {
 
-            if(obj === this._objects[i]) {
-
-                this._objects.splice(i, 1);
-                break;
-            }
+            this._objects.splice(index, 1);
+            this._trySaveJson();
         }
-        this._trySaveJson();
     },
+    /**
+     * Updates object
+     * @param obj Old object
+     * @param newObj New object
+     */
+    update: function(obj, newObj) {
 
+        var index = this._objects.indexOf(obj);
+        if(index !== -1) {
+
+            this._objects[index] = newObj;
+            this._trySaveJson();
+        }
+    },
     /**
      * Saves json to file if necessary
      * @private
