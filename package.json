@@ -1,13 +1,15 @@
 {
-  "name": "test_mission",
-  "description": "Address book",
-  "version": "0.0.1",
-  "private": true,
-  "dependencies": {
-    "express": "3.x",
-    "ejs": "*"
-  },
-  "scripts": {
-    "start": "node app.js"
-  }
+    "name": "test_mission",
+    "description": "Address book",
+    "version": "0.0.1",
+    "private": true,
+    "dependencies": {
+        "express": "3.x",
+        "ejs": "*",
+        "jasmine-node": "*"
+    },
+    "scripts": {
+        "start": "node app.js",
+        "test": "node_modules/.bin/jasmine-node test/server"
+    }
 }
