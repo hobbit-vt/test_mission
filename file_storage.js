@@ -1,9 +1,9 @@
 var fs = require('fs');
 
-var FileStorage = function(saveTime, isTest){
+var FileStorage = function(fileName, saveTime){
 
-    this.FILE_NAME = !isTest ? 'file_storage_db.json' : 'file_storage_db_test.json';
-    this.SAVE_TIME = saveTime !== undefined && saveTime !== null ? saveTime : 5000;
+    this.FILE_NAME = typeof(fileName) === 'string' ? fileName : 'file_storage_db.json';
+    this.SAVE_TIME = typeof(saveTime) === 'number' ? saveTime : 5000;
 
     /**
      * Actually object
