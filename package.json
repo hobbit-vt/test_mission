@@ -6,10 +6,13 @@
     "dependencies": {
         "express": "3.x",
         "ejs": "*",
-        "jasmine-node": "*"
+        "jasmine-node": "*",
+        "karma": "*",
+        "karma-jasmine": "*",
+        "karma-chrome-launcher": "*"
     },
     "scripts": {
         "start": "node app.js",
-        "test": "node_modules/.bin/jasmine-node test/server"
+        "test": "node_modules/.bin/jasmine-node test/server && node_modules/karma/bin/karma start test/client/karma.conf.js"
     }
 }
