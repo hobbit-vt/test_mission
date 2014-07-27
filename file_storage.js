@@ -77,6 +77,14 @@ FileStorage.prototype = {
         }
     },
     /**
+     * Clears all objects from storage
+     */
+    clear: function() {
+
+        this._objects.length = 0; //clear array
+        this._trySaveJson();
+    },
+    /**
      * Saves json to file if necessary
      * @private
      */
