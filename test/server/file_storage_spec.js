@@ -50,11 +50,14 @@ describe('File Storage file', function(){
 
     it('should exist', function(done){
 
-        fs.exists('file_storage_db_test.json', function(exist){
+        setTimeout(function(){
 
-            expect(exist).toBeTruthy();
-            done();
-        });
+            fs.exists('file_storage_db_test.json', function(exist){
+
+                expect(exist).toBeTruthy();
+                done();
+            });
+        }, 200); //time to create file
     });
 
     it('should have one object', function(done){
